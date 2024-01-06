@@ -1,11 +1,39 @@
 // import React from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import signin from "../assets/images/signin.jpg";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Signin = () => {
   const [phone, setPhone] = useState("");
+  const [user, setUser] = useState<any>(null);
+  const [sendOtpClick, setSendOtpClick] = useState(false);
+  const otpElement = useRef<HTMLInputElement>(null);
+
+  const sendOtp = async () => {
+    try {
+      const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
+      const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
+      setUser(confirmation);
+      recaptcha.clear();
+      setSendOtpClick(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const verifyOtp = async () => {
+    try {
+      const data = await user.confirm(otpElement.current?.value);
+      console.log(data);
+      console.log(otpElement.current?.value);
+      setSendOtpClick(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="grid grid-cols-2 h-screen bg-black">
       <div
@@ -19,7 +47,7 @@ const Signin = () => {
           <PhoneInput
             country={"us"}
             value={phone}
-            onChange={(phone) => setPhone(phone)}
+            onChange={(phone) => setPhone("+" + phone)}
             inputStyle={{
               backgroundColor: "black",
               color: "white",
@@ -34,9 +62,30 @@ const Signin = () => {
           By proceeding you confirm that you are above 18 years <br />
           of age and agree to the Privacy Policy Terms of Use.
         </h6>
-        <button className="mt-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded w-48 md:w-72">
+        <button
+          onClick={sendOtp}
+          className="mt-10 bg-blue-500 hover:bg-blue-700 text-base text-white font-bold py-2 px-3 rounded w-48 md:w-72"
+        >
           Get OTP
         </button>
+        <div id="recaptcha" className="mt-4"></div>
+        {sendOtpClick && (
+          <>
+            <input
+              type="text"
+              className="bg-black border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 md:w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Enter Otp"
+              ref={otpElement}
+              required
+            />
+            <button
+              onClick={verifyOtp}
+              className="mt-10 bg-blue-500 hover:bg-blue-700 h-10 text-base text-white font-bold py-2 px-3 rounded w-48 md:w-72"
+            >
+              Verify OTP
+            </button>
+          </>
+        )}
         <h6 className="text-slate-500 mt-24 text-base">
           Enter code, number and{" "}
           <span className="text-blue-500"> click get OTP</span>
