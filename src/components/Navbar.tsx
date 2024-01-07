@@ -6,6 +6,7 @@ import love from "../assets/images/love.png";
 import action from "../assets/images/action.png";
 import comedy from "../assets/images/comedy.png";
 import { useState } from "react";
+import { Fade } from "react-awesome-reveal";
 
 const Navbar = () => {
   const [hover, setHover] = useState(false);
@@ -42,14 +43,16 @@ const Navbar = () => {
         />
       </div>
       {hover && (
-        <div className="right-side ml-8 z-20 w-20 bg-black text-slate-300 text-base font-bold">
-          <h4 className="mt-20">Login</h4>
-          <h4 className="mt-9">Search</h4>
-          <h4 className="mt-12">Home</h4>
-          <h4 className="mt-10">Love</h4>
-          <h4 className="mt-9">Comedy</h4>
-          <h4 className="mt-10">Action</h4>
-        </div>
+        <Fade>
+          <div className="right-side ml-8 z-20 w-20 bg-black text-slate-300 text-base font-bold">
+            <h4 className="mt-20">Login</h4>
+            <h4 className="mt-9">Search</h4>
+            <h4 className="mt-12">Home</h4>
+            <h4 className="mt-10">Love</h4>
+            <h4 className="mt-9">Comedy</h4>
+            <h4 className="mt-10">Action</h4>
+          </div>
+        </Fade>
       )}
     </div>
   );
