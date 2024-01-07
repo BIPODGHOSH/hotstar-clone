@@ -11,7 +11,7 @@ import { Fade } from "react-awesome-reveal";
 const Navbar = () => {
   const [hover, setHover] = useState(false);
   return (
-    <div className="bg-black grid grid-cols-2 h-screen w-28">
+    <div className="z-20 fixed bg-black grid grid-cols-2 h-screen w-24">
       <div
         className="left-side"
         onMouseEnter={() => {
@@ -44,13 +44,13 @@ const Navbar = () => {
       </div>
       {hover && (
         <Fade>
-          <div className="right-side ml-8 z-20 w-20 bg-black text-slate-300 text-base font-bold">
-            <h4 className="mt-20">Login</h4>
-            <h4 className="mt-9">Search</h4>
-            <h4 className="mt-12">Home</h4>
-            <h4 className="mt-10">Love</h4>
+          <div className=" bg-opacity-60 h-full right-side ml-8 z-20 w-20 bg-black text-slate-300 text-base font-bold">
+            <h4 className=" pt-20">Login</h4>
+            <h4 className="mt-8">Search</h4>
+            <h4 className="mt-11">Home</h4>
+            <h4 className="mt-9">Love</h4>
             <h4 className="mt-9">Comedy</h4>
-            <h4 className="mt-10">Action</h4>
+            <h4 className="mt-9">Action</h4>
           </div>
         </Fade>
       )}
