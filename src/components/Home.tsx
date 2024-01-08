@@ -1,27 +1,17 @@
-import { useEffect, useState } from "react";
-
-const Home = () => {
-  const [movies, setMovies] = useState([]);
-  const getMovies = async () => {
-    try {
-      await fetch(
-        "https://api.themoviedb.org/3/discover/movie?api_key=aa4221617688ee03abe434f78ca05707"
-      )
-        .then((res) => res.json())
-        .then((data) => setMovies(data.results));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    getMovies();
-  }, []);
+const Home = ({ movies }: any) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pl-20">
-      {movies.map((movie: any) => {
-        return (
-          <>
+    <>
+      <input
+        type="text"
+        id="first_name"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="John"
+        required
+      />
+      <h1 className="text-slate-300 font-bold text-xl pl-28">New Releases</h1>
+      <div className="grid grid-cols-3 sm:grid-cols-5 pl-20">
+        {movies.map((movie: any) => {
+          return (
             <div
               key={movie.id}
               className="max-w-sm rounded overflow-hidden shadow-lg mt-2 ml-2"
@@ -32,10 +22,10 @@ const Home = () => {
                 alt="Sunset in the mountains"
               />
             </div>
-          </>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
