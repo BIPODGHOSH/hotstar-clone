@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ setMenu }: any) => {
+const Navbar = ({ setMenu, setSearch, searchClick, searchRef }: any) => {
   const [hover, setHover] = useState(false);
   return (
     <div className="z-20 fixed bg-black grid grid-cols-2 h-screen w-24">
@@ -33,6 +33,12 @@ const Navbar = ({ setMenu }: any) => {
           src={search}
           alt="search"
           className=" w-9 ml-7 mt-8 cursor-pointer"
+          onClick={() => {
+            setTimeout(() => {
+              searchRef?.current?.focus();
+            }, 1);
+            setSearch(!searchClick);
+          }}
         />
         <img
           src={home}
