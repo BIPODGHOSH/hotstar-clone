@@ -30,7 +30,7 @@ const Main = () => {
   return (
     <>
       <div className=" bg-black">
-        <div className="flex h-screen w-full">
+        <div className="flex w-full">
           <div className="w-1/12">
             <Navbar
               setMenu={setMenu}
@@ -39,9 +39,11 @@ const Main = () => {
               searchRef={searchRef}
             />
           </div>
-          <div className="w-11/12">
-            <Welcome movies={movies[0]} />
-          </div>
+          {!search && (
+            <div className="w-11/12">
+              <Welcome movies={movies[0]} />
+            </div>
+          )}
         </div>
         <div>
           <Home movies={movies} search={search} searchRef={searchRef} />

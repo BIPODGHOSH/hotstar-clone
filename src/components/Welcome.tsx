@@ -1,11 +1,12 @@
+import { MainContainer } from "./MovieDetails";
 const Welcome = ({ movies }: any) => {
   console.log(movies);
   return (
-    <div
+    <MainContainer
       style={{
         backgroundImage: `linear-gradient(to right,rgba(0,0,0,7),rgba(0,0,0,0.1)), url(https://image.tmdb.org/t/p/w500${movies?.poster_path})`,
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        backgroundSize: "1280px 800px",
       }}
       className=" h-full pb-7  grid grid-cols-2"
     >
@@ -26,7 +27,7 @@ const Welcome = ({ movies }: any) => {
           Watch Now
         </button>
       </div>
-    </div>
+    </MainContainer>
   );
 };
 

@@ -44,20 +44,29 @@ const Navbar = ({ setMenu, setSearch, searchClick, searchRef }: any) => {
           src={home}
           alt="home"
           className=" w-9 ml-7 mt-8 cursor-pointer"
-          onClick={() => setMenu("home")}
+          onClick={() => {
+            setSearch(false);
+            setMenu("home");
+          }}
         />
 
         <img
           src={movie}
           alt="movie"
           className=" w-16 ml-5 mt-8 cursor-pointer"
-          onClick={() => setMenu("movie")}
+          onClick={() => {
+            setSearch(false);
+            setMenu("movie");
+          }}
         />
         <img
           src={tv}
           alt="tv"
           className=" w-16 ml-5 mt-8 cursor-pointer"
-          onClick={() => setMenu("tv")}
+          onClick={() => {
+            setSearch(false);
+            setMenu("tv");
+          }}
         />
       </div>
       {hover && (
