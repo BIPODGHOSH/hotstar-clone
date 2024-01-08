@@ -25,7 +25,7 @@ const Home = ({ movies, search, searchRef }: any) => {
           )
           .map((movie: any) => {
             return (
-              <Link to="/movie-details" state={movie}>
+              <Link to="/movie-details" state={movie} key={movie.id}>
                 <div
                   key={movie.id}
                   className="max-w-sm rounded overflow-hidden shadow-lg mt-2 ml-2"

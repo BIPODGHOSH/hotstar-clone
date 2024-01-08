@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import ViewTrailer from "./ViewTrailer";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ export const MainContainer = styled.div`
 const MovieDetails = () => {
   const location = useLocation();
   const movie = location.state?.movie || location.state;
-  console.log(location);
+  console.log(movie);
 
   return (
     <MainContainer
@@ -43,9 +44,7 @@ const MovieDetails = () => {
       <h1 className="font-bold text-yellow-500 text-xl mt-8">
         Language - {movie?.original_language}
       </h1>
-      <button className="bg-gray-600 mt-6 w-full sm:w-80 sm:h-10 h-14 hover:bg-gray-700 rounded text-white font-bold py-2 px-4">
-        Watch Now
-      </button>
+      <ViewTrailer movieId={movie?.id} />
       {/* </div> */}
     </MainContainer>
   );

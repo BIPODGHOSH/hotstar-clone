@@ -1,4 +1,5 @@
 import { MainContainer } from "./MovieDetails";
+import ViewTrailer from "./ViewTrailer";
 const Welcome = ({ movies }: any) => {
   console.log(movies);
   return (
@@ -23,9 +24,7 @@ const Welcome = ({ movies }: any) => {
         <h1 className="font-bold text-yellow-500 text-xl mt-8">
           Language - {movies?.original_language}
         </h1>
-        <button className="bg-gray-600 mt-6 w-full sm:w-80 sm:h-10 h-14 hover:bg-gray-700 rounded text-white font-bold py-2 px-4">
-          Watch Now
-        </button>
+        {movies && <ViewTrailer welcomeId={movies.id} />}
       </div>
     </MainContainer>
   );
