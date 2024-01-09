@@ -5,8 +5,11 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signin = () => {
+  const navigate = useNavigate();
   const [phone, setPhone] = useState("");
   const [user, setUser] = useState<any>(null);
   const [sendOtpClick, setSendOtpClick] = useState(false);
@@ -26,14 +29,15 @@ const Signin = () => {
 
   const verifyOtp = async () => {
     try {
-      const data = await user.confirm(otpElement.current?.value);
-      console.log(data);
-      console.log(otpElement.current?.value);
+      await user.confirm(otpElement.current?.value);
+      navigate("/");
+      auth.currentUser && toast.success("Logout Successful");
       setSendOtpClick(false);
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <div className="grid grid-cols-2 h-screen bg-black">
       <div

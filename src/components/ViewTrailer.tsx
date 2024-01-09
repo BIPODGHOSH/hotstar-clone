@@ -1,6 +1,9 @@
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { auth } from "../firebase";
 
 const customStyles = {
   content: {
@@ -16,7 +19,6 @@ const ViewTrailer = ({ movieId, welcomeId }: any) => {
   console.log(welcomeId);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [video, setVideo] = useState<any>();
-  let subtitle: any;
 
   const getVideo = async () => {
     try {
@@ -49,11 +51,20 @@ const ViewTrailer = ({ movieId, welcomeId }: any) => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const handleWatchNow = () => {
+    if (auth.currentUser) {
+      openModal();
+    } else {
+      toast.warning("Please login");
+    }
+  };
+
   return (
     <div>
       <button
         className="bg-gray-600 mt-6 w-full sm:w-80 sm:h-10 h-14 hover:bg-gray-700 rounded text-white font-bold py-2 px-4"
-        onClick={openModal}
+        onClick={handleWatchNow}
       >
         Watch Now
       </button>
@@ -64,6 +75,9 @@ const ViewTrailer = ({ movieId, welcomeId }: any) => {
       >
         {video && <YouTube videoId={video[0].key} />}
       </Modal>
+      <div className="mt-28">
+        <ToastContainer />
+      </div>
     </div>
   );
 };

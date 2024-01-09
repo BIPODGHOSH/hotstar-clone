@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 50px;
+  padding-left: 30px;
 
   @media (max-width: 768px) {
     background-size: 600px 900px;
